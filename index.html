@@ -129,6 +129,8 @@ h2{
 
 const matrix=document.getElementById("matrix");
 const result=document.getElementById("result");
+const BIT_COUNT = 8; // đổi thành 10 nếu muốn
+
 
 const spinSound = document.getElementById("spinSound");
 
@@ -142,9 +144,9 @@ for(let i=0;i<=9;i++){
     matrix.appendChild(cell);
 }
 
-function random5Bit(){
-    const num=Math.floor(Math.random()*32);
-    return num.toString(2).padStart(5,"0");
+function randomBits(){
+    const num = Math.floor(Math.random() * Math.pow(2, BIT_COUNT));
+    return num.toString(2).padStart(BIT_COUNT, "0");
 }
 
 function spin(number){
@@ -173,7 +175,8 @@ spinSound.play().catch(()=>{});
     wrapper.appendChild(bitRow);
 
     let bitBoxes=[];
-    for(let i=0;i<5;i++){
+    for(let i=0;i<BIT_COUNT;i++){
+
         let b=document.createElement("div");
         b.className="bitbox running";
         bitRow.appendChild(b);
@@ -190,10 +193,10 @@ spinSound.play().catch(()=>{});
         let interval=20+(180*percent);
 
         if(progress%interval<16){
-            let bits=random5Bit();
-            for(let i=0;i<5;i++){
-                bitBoxes[i].textContent=bits[i];
-            }
+           let bits = randomBits();
+for(let i=0;i<BIT_COUNT;i++){
+    bitBoxes[i].textContent = bits[i];
+}
         }
 
         if(progress<duration){
@@ -214,4 +217,6 @@ spinSound.play().catch(()=>{});
 
 </body>
 </html>
+
+
 
